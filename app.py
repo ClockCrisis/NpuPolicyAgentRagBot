@@ -109,8 +109,65 @@ def show_file_uploader():
             except Exception as e:
                 st.sidebar.error(f"处理失败: {str(e)}")
 
+    st.sidebar.divider()
+    st.sidebar.subheader("粘贴文本上传")
 
-st.title("智扫通机器人智能客服")
+    with st.sidebar.container():
+        text_input = st.text_area(
+            "在此粘贴文本内容",
+            height=150,
+            placeholder="请输入要上传的文本内容...",
+            key="text_upload_input"
+        )
+
+        col1, col2 = st.sidebar.columns([2, 1])
+        with col1:
+            filename_input = st.text_input(
+                "文件名",
+                value="粘贴文本.txt",
+                placeholder="请输入文件名",
+                key="text_upload_filename"
+            )
+        with col2:
+            st.write("")
+
+        if st.sidebar.button("提交文本", type="primary", key="submit_text_btn"):
+            if not text_input.strip():
+                st.sidebar.error("请输入文本内容")
+            elif not filename_input.strip():
+                st.sidebar.error("请输入文件名")
+            else:
+                try:
+                    # 确保文件名有后缀
+                    if not filename_input.strip().endswith(('.txt', '.pdf', '.docx')):
+                        filename_input = filename_input.strip() + ".txt"
+
+                    # 保存文件到 data 目录
+                    data_path = get_abs_path("data")
+                    file_path = os.path.join(data_path, filename_input)
+
+                    # 如果文件已存在，先删除
+                    if os.path.exists(file_path):
+                        os.remove(file_path)
+
+                    # 保存文件
+                    with open(file_path, "w", encoding="utf-8") as f:
+                        f.write(text_input)
+
+                    # 添加到向量库
+                    vs_service = VectorStoreService()
+                    success = vs_service.add_document(text_input, filename_input)
+
+                    if success:
+                        st.sidebar.success("文本上传并添加到知识库成功！")
+                    else:
+                        st.sidebar.error("添加到知识库失败")
+
+                except Exception as e:
+                    st.sidebar.error(f"处理失败: {str(e)}")
+
+
+st.title("瓜大政策智能客服")
 st.divider()
 
 # 显示文件上传组件
