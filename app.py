@@ -2,6 +2,25 @@ import time
 
 import streamlit as st
 from agent.react_agent import ReactAgent
+from utils.config_handler import rag_conf
+
+# 打印模型配置信息
+def print_model_info():
+    provider = rag_conf.get("model_provider", "dashscope")
+    print("=" * 50)
+    print("模型配置信息")
+    print("=" * 50)
+    print(f"模型提供商: {provider}")
+    if provider == "openai":
+        openai_conf = rag_conf.get("openai", {})
+        print(f"聊天模型: {openai_conf.get('chat_model')}")
+        print(f"API 地址: {openai_conf.get('base_url')}")
+    else:
+        print(f"聊天模型: {rag_conf.get('chat_model_name')}")
+    print(f"嵌入模型: {rag_conf.get('embedding_model_name')}")
+    print("=" * 50)
+
+print_model_info()
 
 # 标题
 st.title("智扫通机器人智能客服")

@@ -1,2 +1,12 @@
+# 模型提供商: dashscope | openai
+model_provider: openai
+
+# dashscope 兼容配置
 chat_model_name: qwen3-max
 embedding_model_name: text-embedding-v4
+
+# OpenAI 兼容配置
+openai:
+  base_url: http://10.68.85.41:8080/v1
+  api_key: none
+  chat_model: qwen2.5-72b-awq
