@@ -27,6 +27,30 @@ class VectorStoreService:
     def get_retriever(self):
         return self.vector_store.as_retriever(search_kwargs={"k": chroma_conf["k"]})
 
+    def add_document(self, text: str, filename: str):
+        """
+        将文本内容添加到向量库
+        :param text: 文本内容
+        :param filename: 文件名（用于metadata）
+        :return: 是否成功
+        """
+        from langchain_core.documents import Document
+
+        # 创建Document对象
+        doc = Document(page_content=text, metadata={"source": filename})
+
+        # 分割文档
+        split_docs = self.spliter.split_documents([doc])
+
+        if not split_docs:
+            logger.warning(f"[添加文档]{filename}分片后没有有效内容")
+            return False
+
+        # 添加到向量库
+        self.vector_store.add_documents(split_docs)
+        logger.info(f"[添加文档]{filename}添加成功")
+        return True
+
     def load_document(self):
         """
         从数据文件夹内读取数据文件，转为向量存入向量库
@@ -107,7 +131,7 @@ if __name__ == '__main__':
 
     retriever = vs.get_retriever()
 
-    res = retriever.invoke("迷路")
+    res = retriever.invoke("钟世平")
     for r in res:
         print(r.page_content)
         print("-"*20)

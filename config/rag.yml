@@ -1,5 +1,7 @@
 # 模型提供商: dashscope | openai
-model_provider: openai
+# model_provider: openai
+model_provider: dashscope
+
 
 # dashscope 兼容配置
 chat_model_name: qwen3-max
