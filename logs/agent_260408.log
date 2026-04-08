@@ -4,3 +4,14 @@
 2026-04-08 20:06:46,861 - agent - INFO - vector_store.py:74 - [加载知识库]D:\code\claude_code\AgentP\data\故障排除.txt内容已经存在知识库内，跳过
 2026-04-08 20:06:46,869 - agent - INFO - vector_store.py:74 - [加载知识库]D:\code\claude_code\AgentP\data\维护保养.txt内容已经存在知识库内，跳过
 2026-04-08 20:06:46,876 - agent - INFO - vector_store.py:74 - [加载知识库]D:\code\claude_code\AgentP\data\选购指南.txt内容已经存在知识库内，跳过
+2026-04-08 20:07:28,836 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有1条消息。
+2026-04-08 20:07:28,839 - agent - DEBUG - middleware.py:42 - [log_before_model]HumanMessage | 你好
+2026-04-08 20:07:35,089 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有1条消息。
+2026-04-08 20:07:35,090 - agent - DEBUG - middleware.py:42 - [log_before_model]HumanMessage | 我是小钟
+2026-04-08 20:07:41,981 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有1条消息。
+2026-04-08 20:07:41,982 - agent - DEBUG - middleware.py:42 - [log_before_model]HumanMessage | 我是谁
+2026-04-08 20:07:43,091 - agent - INFO - middleware.py:19 - [tool monitor]执行工具：get_user_id
+2026-04-08 20:07:43,092 - agent - INFO - middleware.py:20 - [tool monitor]传入参数：{}
+2026-04-08 20:07:43,093 - agent - INFO - middleware.py:24 - [tool monitor]工具get_user_id调用成功
+2026-04-08 20:07:43,181 - agent - INFO - middleware.py:40 - [log_before_model]即将调用模型，带有3条消息。
+2026-04-08 20:07:43,182 - agent - DEBUG - middleware.py:42 - [log_before_model]ToolMessage | 1009
